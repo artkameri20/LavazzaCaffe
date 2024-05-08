@@ -31,12 +31,111 @@
       <div class="content">
         
   </head>
-  <body>
+  <body> <div class="container">
+    <form id="form" action="/">
+        <h1>Registration</h1>
+        <div class="input-control">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text">
+            <div class="error"></div>
+        </div>
+        <div class="input-control">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="text">
+            <div class="error"></div>
+        </div>
+        <div class="input-control">
+            <label for="password">Password</label>
+            <input id="password"name="password" type="password">
+            <div class="error"></div>
+        </div>
+        <div class="input-control">
+            <label for="password2">Password again</label>
+            <input id="password2"name="password2" type="password">
+            <div class="error"></div>
+        </div>
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
+</body>
 
 </script>
       </div>
     </section>
-    <script>
+    <script>const form = document.getElementById('form');
+      const username = document.getElementById('username');
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+      const password2 = document.getElementById('password2');
+      
+      form.addEventListener('submit', e => {
+          e.preventDefault();
+      
+          validateInputs();
+      });
+      
+      const setError = (element, message) => {
+          const inputControl = element.parentElement;
+          const errorDisplay = inputControl.querySelector('.error');
+      
+          errorDisplay.innerText = message;
+          inputControl.classList.add('error');
+          inputControl.classList.remove('success')
+      }
+      
+      const setSuccess = element => {
+          const inputControl = element.parentElement;
+          const errorDisplay = inputControl.querySelector('.error');
+      
+          errorDisplay.innerText = '';
+          inputControl.classList.add('success');
+          inputControl.classList.remove('error');
+      };
+      
+      const isValidEmail = email => {
+          const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(String(email).toLowerCase());
+      }
+      
+      const validateInputs = () => {
+          const usernameValue = username.value.trim();
+          const emailValue = email.value.trim();
+          const passwordValue = password.value.trim();
+          const password2Value = password2.value.trim();
+      
+          if(usernameValue === '') {
+              setError(username, 'Username is required');
+          } else {
+              setSuccess(username);
+          }
+      
+          if(emailValue === '') {
+              setError(email, 'Email is required');
+          } else if (!isValidEmail(emailValue)) {
+              setError(email, 'Provide a valid email address');
+          } else {
+              setSuccess(email);
+          }
+      
+          if(passwordValue === '') {
+              setError(password, 'Password is required');
+          } else if (passwordValue.length < 8 ) {
+              setError(password, 'Password must be at least 8 character.')
+          } else {
+              setSuccess(password);
+          }
+      
+          if(password2Value === '') {
+              setError(password2, 'Please confirm your password');
+          } else if (password2Value !== passwordValue) {
+              setError(password2, "Passwords doesn't match");
+          } else {
+              setSuccess(password2);
+          }
+      
+      };
+      
+
       const header = document.querySelector("header");
       const hamburgerBtn = document.querySelector("#hamburger-btn");
       const closeMenuBtn = document.querySelector("#close-menu-btn");
@@ -47,292 +146,82 @@
     </script>
     
 
-    <footer>
-      <div class="content">
-        <div class="top">
-          <div class="logo-details">
-            <i class="fab fa-slack"></i>
-            <span class="logo_name">LavazzaCoffes</span>
-          </div>
-          <div class="media-icons">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-          </div>
-        </div>
-        <div class="link-boxes">
-          <ul class="box">
-            <li class="link_name">Company</li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Contact us</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Get started</a></li>
-          </ul>
-          <ul class="box">
-            <li class="link_name">Services</li>
-            <li><a href="#">App design</a></li>
-            <li><a href="#">Web design</a></li>
-            <li><a href="#">Logo design</a></li>
-            <li><a href="#">Banner design</a></li>
-          </ul>
-          <ul class="box">
-            <li class="link_name">Account</li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">My account</a></li>
-            <li><a href="#">Prefrences</a></li>
-            <li><a href="#">Purchase</a></li>
-          </ul>
-          <ul class="box">
-            <li class="link_name">Courses</li>
-            <li><a href="#">HTML & CSS</a></li>
-            <li><a href="#">JavaScript</a></li>
-            <li><a href="#">Photography</a></li>
-            <li><a href="#">Photoshop</a></li>
-          </ul>
-          <ul class="box input-box">
-            <li class="link_name">Subscribe</li>
-            <li><input type="text" placeholder="Enter your email"></li>
-            <li><input type="button" value="Subscribe"></li>
-          </ul>
-        </div>
-      </div>
   
-      </div>
-    </footer>
   
 <style>
-    footer{
 
-background:black;
-width: 100%;
-bottom: 0;
-left: 0;
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;body {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    font-family: 'Poppins', sans-serif;
 }
-footer::before{
-content: '';
-position: absolute;
-left: 0;
-top: 100px;
-height: 1px;
-width: 100%;
-background: #AFAFB6;
+
+#form {
+    width: 300px;
+    margin: 20vh auto 0 auto;
+    padding: 20px;
+    background-color: black;
+    border-radius: 4px;
+    font-size: 12px;
 }
-footer .content{
-max-width: 1250px;
-margin: auto;
-padding: 30px 40px 40px 40px;
+
+#form h1 {
+    color: #0f2027;
+    text-align: center;
 }
-footer .content .top{
-display: flex;
-align-items: center;
-justify-content: space-between;
-margin-bottom: 50px;
+
+#form button {
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    color: white;
+    background-color: rgb(27, 19, 1);
+    border: none;
+    border-radius: 4px;
 }
-.content .top .logo-details{
-color: #fff;
-font-size: 30px;
+
+.input-control {
+    display: flex;
+    flex-direction: column;
 }
-.content .top .media-icons{
-display: flex;
+
+.input-control input {
+    border: 2px solid #f0f0f0;
+	border-radius: 4px;
+	display: block;
+	font-size: 12px;
+	padding: 10px;
+	width: 100%;
 }
-.content .top .media-icons a{
-height: 40px;
-width: 40px;
-margin: 0 8px;
-border-radius: 50%;
-text-align: center;
-line-height: 40px;
-color: #fff;
-font-size: 17px;
-text-decoration: none;
-transition: all 0.4s ease;
+
+.input-control input:focus {
+    outline: 0;
 }
-.top .media-icons a:nth-child(1){
-background: #4267B2;
+
+.input-control.success input {
+    border-color: #09c372;
 }
-.top .media-icons a:nth-child(1):hover{
-color: #4267B2;
-background: #fff;
+
+.input-control.error input {
+    border-color: #ff3860;
 }
-.top .media-icons a:nth-child(2){
-background: #1DA1F2;
+
+.input-control .error {
+    color: #ff3860;
+    font-size: 9px;
+    height: 13px;
 }
-.top .media-icons a:nth-child(2):hover{
-color: #1DA1F2;
-background: #fff;
+  font-family: "Poppins" , sans-serif;
 }
-.top .media-icons a:nth-child(3){
-background: #E1306C;
-}
-.top .media-icons a:nth-child(3):hover{
-color: #E1306C;
-background: #fff;
-}
-.top .media-icons a:nth-child(4){
-background: #0077B5;
-}
-.top .media-icons a:nth-child(4):hover{
-color: #0077B5;
-background: #fff;
-}
-.top .media-icons a:nth-child(5){
-background: #FF0000;
-}
-.top .media-icons a:nth-child(5):hover{
-color: #FF0000;
-background: #fff;
-}
-footer .content .link-boxes{
-width: 100%;
-display: flex;
-justify-content: space-between;
-}
-footer .content .link-boxes .box{
-width: calc(100% / 5 - 10px);
-}
-.content .link-boxes .box .link_name{
-color: #fff;
-font-size: 18px;
-font-weight: 400;
-margin-bottom: 10px;
-position: relative;
-}
-.link-boxes .box .link_name::before{
-content: '';
-position: absolute;
-left: 0;
-bottom: -2px;
-height: 2px;
-width: 35px;
-background: #fff;
-}
-.content .link-boxes .box li{
-margin: 6px 0;
-list-style: none;
-}
-.content .link-boxes .box li a{
-color: #fff;
-font-size: 14px;
-font-weight: 400;
-text-decoration: none;
-opacity: 0.8;
-transition: all 0.4s ease
-}
-.content .link-boxes .box li a:hover{
-opacity: 1;
-text-decoration: underline;
-}
-.content .link-boxes .input-box{
-margin-right: 55px;
-}
-.link-boxes .input-box input{
-height: 40px;
-width: calc(100% + 55px);
-outline: none;
-border: 2px solid #AFAFB6;
-background: black;
-border-radius: 4px;
-padding: 0 15px;
-font-size: 15px;
-color: #fff;
-margin-top: 5px;
-}
-.link-boxes .input-box input::placeholder{
-color: #AFAFB6;
-font-size: 16px;
-}
-.link-boxes .input-box input[type="button"]{
-background: #fff;
-color: black;
-border: none;
-font-size: 18px;
-font-weight: 500;
-margin: 4px 0;
-opacity: 0.8;
-cursor: pointer;
-transition: all 0.4s ease;
-}
-.input-box input[type="button"]:hover{
-opacity: 1;
-}
-footer .bottom-details{
-width: 100%;
-background: #0F0844;
-}
-footer .bottom-details .bottom_text{
-max-width: 1250px;
-margin: auto;
-padding: 20px 40px;
-display: flex;
-justify-content: space-between;
-}
-.bottom-details .bottom_text span,
-.bottom-details .bottom_text a{
-font-size: 14px;
-font-weight: 300;
-color: #fff;
-opacity: 0.8;
-text-decoration: none;
-}
-.bottom-details .bottom_text a:hover{
-opacity: 1;
-text-decoration: underline;
-}
-.bottom-details .bottom_text a{
-margin-right: 10px;
-}
-@media (max-width: 900px) {
-footer .content .link-boxes{
-  flex-wrap: wrap;
-}
-footer .content .link-boxes .input-box{
-  width: 40%;
-  margin-top: 10px;
-}
-}
-@media (max-width: 700px){
-footer{
-  position: relative;
-}
-.content .top .logo-details{
-  font-size: 26px;
-}
-.content .top .media-icons a{
-  height: 35px;
-  width: 35px;
-  font-size: 14px;
-  line-height: 35px;
-}
-footer .content .link-boxes .box{
-  width: calc(100% / 3 - 10px);
-}
-footer .content .link-boxes .input-box{
-  width: 60%;
-}
-.bottom-details .bottom_text span,
-.bottom-details .bottom_text a{
-  font-size: 12px;
-}
-}
-@media (max-width: 520px){
-footer::before{
-  top: 145px;
-}
-footer .content .top{
-  flex-direction: column;
-}
-.content .top .media-icons{
-  margin-top: 16px;
-}
-footer .content .link-boxes .box{
-  width: calc(100% / 2 - 10px);
-}
-footer .content .link-boxes .input-box{
+body{
+  min-height: 100vh;
   width: 100%;
+  background: #EEECEB;
 }
-}
+
 </style>
 
 
@@ -345,19 +234,9 @@ document.querySelector('.twitter').addEventListener('click', function() {
 });</script>
 
 
-<script>document.querySelector('.facebook').addEventListener('click', function() {
-    window.open('https://www.facebook.com/YourPageName', '_blank');
-});
-
-document.querySelector('.twitter').addEventListener('click', function() {
-    window.open('https://twitter.com/YourTwitterHandle', '_blank');
-});</script>
 
 
 
-
-  </body>
-</html>
 
 
 <style type="text/css">
@@ -514,4 +393,20 @@ header .navbar {
 
 <style>
   
-</style>
+</style> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
