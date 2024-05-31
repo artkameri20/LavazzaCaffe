@@ -68,6 +68,40 @@
     </div>
 
 
+    <style>
+
+      .pagination {
+        display: flex;
+        list-style: none;
+        padding: 0;
+      }
+  
+      .page-item {
+        margin-right: 10px;
+      }
+  
+      .page-link {
+        text-decoration: none;
+        color: #333;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+  
+      
+      @media screen and (max-width: 768px) {
+        .pagination {
+          flex-wrap: wrap;
+        }
+  
+        .page-item {
+          margin-right: 0;
+          margin-bottom: 5px;
+        }
+      }
+    </style>
+  
+  
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item">
@@ -79,10 +113,10 @@
         <li class="page-item"><a class="page-link" href="search engine.html">Product</a></li>
         <li class="page-item"><a class="page-link" href="index.html">Our Team</a></li>
         <li class="page-item"><a class="page-link" href="about.html">About Us</a></li>
-        <li class="page-item"><a class="page-link" href="conactus.html">Conact Us</a></li>
-        <li class="page-item"><a class="page-link" href="progresi.html">Progresi</a></li>
+        <li class="page-item"><a class="page-link" href="conactus.html">Contact Us</a></li>
+        <li class="page-item"><a class="page-link" href="progresi.html">Progress</a></li>
         <li class="page-item"><a class="page-link" href="card.html">Card</a></li>
-        <li class="page-item"><a class="page-link" href="team.html">Reviwes and Feedback</a></li>
+        <li class="page-item"><a class="page-link" href="team.html">Reviews and Feedback</a></li>
         <li class="page-item">
           <a class="page-link" href="#" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
@@ -90,7 +124,6 @@
         </li>
       </ul>
     </nav>
-
 
   
   
